@@ -2,8 +2,17 @@ import sys
 import requests
 from lxml import html
 
+def capitalize_string(s):
+    result = ""
+    for char in s:
+        if char.islower():
+            result += char.upper()
+        else:
+            result += char
+    return result
 
 def get_stock_info(symbol):
+    symbol = capitalize_string(symbol)
     url = f"https://finance.yahoo.com/quote/{symbol}"
     response = requests.get(url)
     if response.status_code != 200:
